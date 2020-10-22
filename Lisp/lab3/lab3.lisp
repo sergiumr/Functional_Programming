@@ -91,7 +91,6 @@
   caps
  )
  )
-; revin
 (DEFUN moveGermCap (li) 
     (MAPCAR 
         (lambda (x) 
