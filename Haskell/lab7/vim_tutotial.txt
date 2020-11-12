@@ -1,0 +1,73 @@
+<s-c> = shift + c
+<c-c> = ctrl + c
+
+
+Moduri de functionare
+    esc - normal: shorcuts asupra textului
+    i - insert: introduceti textul
+    ":" - command mode: executati 
+    v - visual mode: selectati textul
+    <s-v> - visual line mode: selecteza textul pe toata linia
+    <c-v> - visual block mode: selecteza textul pe un block
+    r - replace mode: suprascrie caracterul sub cursor
+    <s-r> - replace line mode: suprascrie lunia
+    <c-w> - window mode: se foloseste pentru manupularea view-ului
+    <c-w> + v = vertical split
+    <c-w> + s = horizontal split
+    q <key> - record mode, replay @<key>
+
+Mod de intrare in insert mode
+    a -> append after a cursor
+    <s-a> -> append at the end
+    i -> insert before cursor
+    <s-i> -> inster at the begining of the line
+    o -> new line (below)
+    <s-o> -> new line (above)
+
+Comenzi de miscare:
+    h,j,k,l <-> left,down,up,rigth 
+    w -> next word
+    <s-w> -> next continious word
+    e -> end of the current word
+    <s-e> -> end of the current continious word
+    b -> beginnig of the word
+    <s-b> -> beginnig of the continoius word
+    puteti multiplica o miscare prin: 3 <comanda>
+
+comenzi de miscare inline:
+    ^ -> beginig of a line
+    $ ->  end of a line
+    f -> find inline forward +(";" - next, ","-previous)
+    <s-f> -> find inline backward +(";" - next, ","-previous)
+    t -> to the inline forward +(";" - next, ","-previous)
+    <s-t> -> to the inline backward +(";" - next, ","-previous)
+
+comenzi de miscare multiple lines:
+    { -> inceputul paragrafului
+    } -> sfarsitul paragrafului
+    gg -> begining of the file
+    <s-g> -> end of the file
+    <c-o> -> last location of the cursor
+    <c-i> -> next location of the cursor
+
+text manipulation
+    y -> yank, copiaza textul
+    yy -> copiaza linia
+    d -> delete, and normal mode
+    dd -> dleete line, normal mode
+    c -> delete, and insert mode
+    cc -> dleete line, insert mode
+    p-> print, paste textul, ()
+    <s-p>-> print, paste textul, (before the cursor)
+    vi +[()]"'> -> select inside block
+    va +[()]"'> -> select outisde block
+    viw -> visual in word
+    visual mode combinat cu comenzi de miscare
+
+undo = u
+redo = <c-r>
+
+gv
+gi
+
+se iese din vim folosind: :wq -> write and quit
