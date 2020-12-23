@@ -1,7 +1,8 @@
+# Guide for installing mikrokosmos
 # First Solution
 ## go to $HOME/.cabal/bin
 ## look for mikrokosmos
-## if there is a mikrokosmos file then
+## if there is a mikrokosmos file
 ### open $HOME/.profile (or $HOME/.bash\_profile)
 ### add PATH="$HOME/.cabal/bin:$PATH"
 # Second Solution
