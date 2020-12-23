@@ -1,0 +1,141 @@
+# lambda calculus este un limbaj minimal
+# cu ajutorul acestia se poate descrie orice program
+#------------------------------------------
+# masina turing     | lambda calculus    --
+# are stare interna | fara stare interna --
+#------------------------------------------
+# sintaxa foarte simpla, formata din 3 luncruri
+# un simbol lambda, o variabila si o corp de functie
+# Ex. \x.x + 1. Easy
+# Functiile sunt unare (ca in Haskell)
+# \xy.x + y <-> \x.\y.x + y
+# Limbajele functionale se bazeaza pe aceasta idee
+#------------------------------------------
+# 
+# (\x.x)d <-> de aplica variabila "d" peste abstractia functiei 
+# (\x.t) <-> t este corpul functiei, x este variabila legata de functie
+# (\x.(x b)) <-> x variabila legata, b variabila libera
+# (\a.(\b.(..(\z.body)..))) <=>\a-z.body
+# body[x/y] <-> fiecare x din body este inlocuit de y
+#------------------------------------------
+# Substitutions
+#------------------------
+# alpha subst a.k.a. redenumirea variabilelor legate
+# (\x.a x) =alpha=> (\y.a y)
+#------------------------
+# betta subst a.k.a. aplicarea argumentului peste abstractia functiei
+# ((\x.((f x) x)) (g a)) =betta=> ((f (g a)) (g a))
+# ((\z.(z a)) (\x.x)) =betta=> ((\x.x) a) =betta=> x
+# echivalent cu
+# ((\z.(z a)) (\x.x)) =betta=> (z a [(\x.x)/z]) =betta=> a [a/x]
+#------------------------
+# eta subst a.k.a. elimina functia
+# \x.f x =eta=> f
+# \s.(\z.z y) s) =eta=> (\z.z y)
+#------------------------
+# o functie este normala form daca nu se mai poate reduce
+# (\x.a x)((\y.b y) c) => a ((\y.b y) c) => a (b c)
+#------------------------------------------
+# Recursivitate 
+# Y <- \y.(\x.y(xx))(\x.y(xx))
+# Y R => (\y.(\x.y(xx))(\x.y(xx))) R
+#     => (\x.R(xx))(\x.R(xx))
+#     => R((\x.R(xx))(\x.R(xx)))
+#     => R(YR) <=> is recursivitate
+#------------------------------------------
+# Notare Brujin
+# variabile nu ai nume
+# variabilele sunt denotate prin numere 
+# numerele reprezinta nivelul de imbricare
+# \x.\y.xy <=Brujin=> \\(21)
+# \x.\y.x <=Brujin=> \\2
+# \xyz.(x z (y z)) <=Brujin=> \\\\((3 1) (2 1))
+#------------------------------------------
+# Combinators
+# 4 operatori
+# I <- \x.x
+# K <- \xy.x
+# S <- \xyz.x z (y z)
+# B <- \xyz.x (y z)
+# S (K S) K => ((\xyz.x z (y z)) ((\xy.x) (\xyz.x z (y z)))) (\xy.x)
+#           => ((\yz.(((\ab.a) (\abc.a c (b c))) z) (y z)) (\xy.x)
+#           => (\z.(((\ab.a) (\abc.a c (b c))) z) ((\xy.x) z))
+#           => (\z.((\b.(\qwe.q e (w e))) z) ((\xy.x) z))
+#           => (\z.((\b.(\qwe.q e (w e))) z) (\y.z))
+#           => (\z.(\qwe.q e (w e)) (\y.z))
+#           => \z.(\we.(\y.z) e (w e))
+#           => \z.\w.\e.z (w e)
+#           => 
+#------------------------
+# Toti Combinatorii se pot reprezenta doar folosind S si K, 
+# I x <=> SKK x
+# SKK => (\xyz.x z (y z))) K K 
+#     => (\yz.(\ab.a) z (y z)) K 
+#     => (\z.((\ab.a) z) ((\ab.a)) z))
+#     => (\z.(\b.z) (\b.z))
+#     => (\z.z)
+# B x y z <=> S (K S) K x y z
+# S (K S) K x y z => ((K S) z (K x)) y z
+#                 => (S (K x)) y z
+#                 => (S ((\xy.x) x)) y z
+#                 => (S (\y.x)) y z
+#                 => ((\xyz.x z (y z)) (\y.x)) y z
+#                 => (\yz.(\w.x) z (y z)) y z)
+#                 => (\yz.x (y z)) y z)
+#                 => x (y z)
+# S (K Sl
+# Reprezentari
+#------------------------
+# numere - numerele sunt reprezentate din pddv functional
+# 0 <-> \sz.z
+# 1 <-> \sz.s(z)
+# 2 <-> \sz.s(s(z))
+# 3 <-> \sz.s(s(s(z)))
+# 4 <-> \sz.s(s(s(s(z))))
+# Succesor
+# S <- \wyx.y(w y x)
+# S 0 => (\wyx.y(w y x)) 0 
+#     => (\wyx.y(w y x)) (\sz.z) 
+#     => (\yx.y((\sz.z) y x) 
+#     => \yx.y(x) == 1
+# Plus
+# P <- \nmfx.n f(m f x)
+# P 1 2 => (\nmfx.n f (m f x)) 1 2
+#       => \fx.1 f (2 f x)
+#       => \fx.(\sz.s(z)) f)((\sz.s(s(z)) f x)
+#       => \fx.(\z.f(z))(f(f(x)))
+#       => \fx.f(f(f(x))) == 3
+# True -- T <- \xy.x
+# False -- F <- \xy.y
+# if then else -- \ite.ite
+# Not -- N <- \x.x F T
+# IsZero -- Z <- \x.x F N F
+# Z 0 => (\x.x F N F) 0
+#     => 0 F N F
+#     => (\sz.z) F N F
+#     => N F => T
+# Z 1 => (\x.x F N F) 1
+#     => 1 F N F
+#     => (\sz.s(z)) F N F 
+#     => F(N)F
+#     => (\xy.y)(N)F
+#     => F
+#------------------------------------------
+# R (functia ce este apelata recusiv) se ocupa de tratarea cazului de oprire
+# si de apelul recursiv
+# 3 + 2 + 1 + 0
+# Pn <- \rn.Z n 0 (Plus n (r(Pred n)))
+# Y Pn 3 => Pn (Y Pn) 3
+#        => (\rn.Z n 0 (Plus n (r(Pred n)))) (Y Pn) 3
+#        => Z 3 0 (Plus 3 ((Y Pn)(Pred 3)))
+#        => (Plus 3 ((Y Pn)(Pred 3)))
+#        => (Plus 3 ((Y Pn) 2))
+#        => (Plus 3 (Pn (Y Pn) 2))
+#        => (Plus 3 (Plus 3 ((Y Pn) 1)
+#        => (Plus 3 (Plus 2 (Plus 1 ((Y Pn) 0))))
+#        => (Plus 3 (Plus 2 (Plus 1 (Pn (Y Pn) 0))))
+#        => (Plus 3 (Plus 2 (Plus 1 (Z 0 0 (Plus 0 ((Y Pn)(Pred 0)))))))
+#        => (Plus 3 (Plus 2 (Plus 1 0)))
+#        => 6
+
+isZer=\x.x false not false
