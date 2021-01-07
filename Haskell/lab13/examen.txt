@@ -1,0 +1,18 @@
+Media laboratoare >= 5,0
+Media laboratoare = (Nota Lisp + Nota Haskell) / 2
+Testul ii din Haskell
+
+O sa fie 1 intrebare /pagina,
+ficare intrebare va avea un cronometru,
+la intrebare se raspunde doar o data, nu poti sa dai back.
+
+*******fara lambda, fara mikrocosmos
+*******si lab13, fara monads
+
+I. Teorie, 4-5 Intrebari
+    a. un rapsuns corect 
+
+II. Probleme, 4-5 Probleme
+    o sa pun punctajul pt fiecare problema
+
+

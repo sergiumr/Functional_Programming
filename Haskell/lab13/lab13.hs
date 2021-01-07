@@ -1,0 +1,88 @@
+-- Puritate: fara efecte secundare, doar input - output,
+-- fiecare functie primeste doar un argument, haskell face asta prin curying
+------------------------------------------------------------
+-- Functor
+-- Un tip peste care se poate aplica functia fmap
+-- Functor sunt tipuri cu parametrii
+-- Functor primeste tipuri neconcrete:
+-- tip concret: Int, Float
+-- tip neconcret: List, Tree
+-- class Functor f where -- f tip neconcret
+--     fmap :: (a->b) -> f a - > f b
+-- fmap transforma Functor de tip a in Functor de tip b
+-- lista este un functor
+-- instance Functor [] where
+--     fmap = map
+-- fmap (+1) [1,2,3]
+-- Maybe este un functor
+-- instance Functor Maybe where
+--     fmap f (Just val) = Just (f val)
+--     fmap f Nothing = Nothing
+-- fmap (+1) (Just 2)
+-- <$> operator fmap infix 
+-- (+1) <$> (Just 2) == fmap (+1) (Just 2)
+-- o functie este un functor
+-- instance Functor ((->) r) where
+--     fmap f g = f . g
+-- ((->) a b) == (a->b) == -> operator functie
+-- ((->) a) aplicare partiala, asteptam al doilea argument
+-- class Functor f where
+--     fmap :: (a->b) -> f a - > f b
+-- in loc de f punem ((->) r)
+-- class Functor ((->) r) where
+--     fmap :: (a->b) -> ((->) r) a) - > ((->) r) b)
+--      (prefix) ==> (infix)
+-- class Functor ((->) r) where
+--     fmap :: (a->b) -> (r -> a) - > (r -> b)
+-- Functorii au 2 legi
+--      1. fmap id = id
+--      2. fmap (g . h) = fmap g . fmap h
+------------------------------------------------------------
+-- Applicative Functors
+-- class Functor f where 
+--     fmap :: (a->b) -> f a - > f b
+-- class Functor f => Applicative f where
+--      pure :: a -> f a
+--      <*> :: f (a->b) -> f a - > f b
+-- instance Applicative [] where
+--      pure a = [a]
+--      fs <*> xs = [f x|f<-fs, x<-xs]
+-- pure (*) <*> [1,2] <*> [2,3]
+-- (*) <$> [1,2] <*> [2,3]
+-- instance Applicative Maybe where
+--     pure a = Just a
+--     Nothing <*> _ = Nothing
+--     (Just f) <*> mx = fmap f mx
+-- (*) <$> (Just 2) <*> (Just 4)
+------------------------------------------------------------
+-- Mondas
+-- class Applicative m => Monad m where  
+--     return :: a -> m a  
+--     (>>=) :: m a -> (a -> m b) -> m b  
+--     (>>) :: m a -> m b -> m b  
+--     x >> y = x >>= \_ -> y  
+--     fail :: String -> m a  
+--     fail msg = error msg  
+-- return are acelasi comportament ca si pure, pune o variabila intr-un context
+-- operatorul >>= (bind) aplica o functie pe o valoare dintr-un context
+-- >> returneaza al doilea argument, se foloseste implemetarea default
+-- fail folosit in cazul in care apare o eroare in context, fail pt Maybe este Nothing
+-- de obicei se implementeaza return si >>=, restul sunt lasate neimplementate
+-- ce este contextul?
+-- Explicatie context: Maybe 1, 1 este in contextul Maybe
+-- data Maybe a = Nothing | Just a
+-- instance Monad Maybe where
+--     return a = Just a
+--     Nothing >>= _ = Nothing
+--     (Just a) >>= f = f a
+-- Just 3 >>= (\x -> Just "!" >>= (\y -> Just (show x ++ y)))
+-- Un fel de functie cu 2 parametrii extrimata folosind monazi, se poate si mai frumos
+-- folosind do
+-- result = do
+--     x <- Just 3
+--     y <- Just "!"
+--     return (show x ++ y)
+-- result = do
+--     x <- Just 3
+--     y <- Just "!"
+--     Just (show x ++ y)
