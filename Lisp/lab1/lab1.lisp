@@ -61,4 +61,5 @@
 ;;; 3. setf => nu evalueaza primul argument, dar tine cont de referinta
 ;;; Ex. (setf l (1 2 3)); (setf (car l) 'c); (print l) => (c 2 3)
 ;;; Code:
+(provide 'lab1)
 ;;; lab1.lisp ends here

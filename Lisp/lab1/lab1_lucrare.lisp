@@ -1,3 +1,7 @@
+;;; package -- Summary
+;;; Commentary:
+;;;
+;;; Code:
 (format T "ex 3.2")
 (format T "====================================================")
 (format T "rezultatelel pentru car~%")
@@ -69,4 +73,5 @@
 (format T "rezultat a) ~D~%" (+ 11 (- 3) 1 (- (+ 43 (* 2 (- 15 11))))))
 (format T "ex 3.5")
 (format T "====================================================~%")
-
+(provide 'lab1_lucrare)
+;;; lab1_lucrare.lisp ends here

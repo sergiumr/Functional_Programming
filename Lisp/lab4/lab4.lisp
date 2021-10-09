@@ -123,4 +123,5 @@
 	     rez)))
    ((null iter) rez)))
 
-;;; lab2.lisp ends here
+(provide 'lab4)
+;;; lab4.lisp ends here
