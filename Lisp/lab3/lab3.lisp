@@ -62,9 +62,8 @@
 
 
 (defun remove-iff (pred lista)
-  (mapcan #'(lambda (x)
-	      (if
-	       (not (funcall pred x)) (list x)))
+  (mapcan #'(lambda (x) (when (not (funcall pred x))
+			  (list x)))
 	  lista))
 
 
@@ -130,11 +129,9 @@
 
 (defun foo (c)
   (mapcar
-   (lambda (x)
-     (if
-      (equal (car x) 3)
-      (setf (cdr x) 7)
-      x))
+   (lambda (x) (if (equal (car x) 3)
+		   (setf (cdr x) 7)
+		   x))
    c))
 
 (provide 'lab3)

@@ -40,7 +40,6 @@
    (factorial-forward (- n 1) (* acumulator n))))
 
 
-					; nr de atomi back
 (defun check-atoms-back (lista)
   (cond
     ((null lista) 0)
@@ -49,7 +48,6 @@
 	  (check-atoms-back (cdr lista))))))
 
 
-					; nr de atomi forward
 (defun check-atoms-forward (lista &optional (acumulator 0))
   (cond
     ((null lista) acumulator)
@@ -58,13 +56,13 @@
     (T (check-atoms-forward (cdr lista)
 			    (check-atoms-forward (car lista) acumulator)))))
 
-					; is-sorted backward
+
 (defun is-sorted-backward (lista)
   (cond
     ((null (cadr lista)) T)
     ((< (car lista) (cadr lista)) (is-sorted-backward (cdr lista)))))
 
-					; remove all not number atoms
+
 (defun remove-not-atoms-back (lista)
   (cond
     ((null lista) nil)
@@ -74,7 +72,7 @@
 				 (remove-not-atoms-back (cdr lista))))
     ((not (null lista)) (remove-not-atoms-back (cdr lista)))))
 
-					; sum all number atoms
+
 (defun sum-all-numbers (lista)
   (cond
     ((null lista) 0)
