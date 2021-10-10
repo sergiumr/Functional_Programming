@@ -21,15 +21,16 @@ Setup Emacs:
     > Check the following [link](https://www.gnu.org/software/emacs/download.html#nonfree)
 2. Copy .emacs.d to:
     > For more info check [link](https://www.gnu.org/software/emacs/manual/html_node/efaq-w32/Location-of-init-file.html)
-    1. Linux based: $HOME
+    * Linux based: $HOME
     > cp -R .emacs.d $HOME/
 
 ## Keybindings
 
 > For keybindings check [link](https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html)
-> C-c means 'Control' key and 'c' key
-> M-c means 'Alt' key and 'c' key
-> \<cr> means 'Enter'
+
+* C-c means 'Control' key and 'c' key
+* M-c means 'Alt' key and 'c' key
+* \<cr> means 'Enter'
 
 ### Short list of keybindings
 
