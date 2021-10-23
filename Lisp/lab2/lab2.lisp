@@ -1,13 +1,13 @@
 ;;; package -- Summary
 ;;; Commentary:
 ;;; Code:
-(defun lungime-back (lista)
+(defun lungime-back (lista) ;done
   (cond
     ((null lista) 0)
     (T (+ 1 (lungime-back (rest lista))))))
 
 
-(defun lungime-forward (lista &optional (lungime 0))
+(defun lungime-forward (lista &optional (lungime 0)) ;done
   (cond
     ((null lista) lungime)
     (T (lungime-forward (rest lista) (+ lungime 1)))))
@@ -147,6 +147,23 @@
     ((> (car lista) item)
      (setq temp (partition (cdr lista) item))
      (list  (car temp) (cons (car lista) (cadr temp))))))
+
+
+(defun insertsort (lista &optional (acc '()))
+  (if
+   (endp lista)
+   acc
+   (insertsort (cdr lista) (insert-sorted acc (car lista)))))
+
+
+(defun insert-sorted (lista el)
+  (cond
+    ((endp lista) `(,el))
+    ((> el (car lista))
+     (cons (car lista) (insert-sorted (cdr lista) el)))
+    (T (cons el lista))))
+
+
 
 (provide 'lab2)
 ;;; lab2.lisp ends here
