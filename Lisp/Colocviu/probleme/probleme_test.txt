@@ -1,0 +1,125 @@
+1. Celula cons (1 . 2) are urmatoarea reprezentare:
+a) [*|*]->[*|*]->nil
+   |      |
+   ->1    ->2
+b) [*|*]->2
+   |
+   ->1
+c) [*|*]->nil [*|*]->nil
+   |          |
+   ->1        -> 2
+d) [*|*]----->[*|*]->nil
+    |         |
+   [*|*]->nil [*|*]->nil
+   |          |
+   ->1        -> 2
+2. Lista (1 2 (4)) are urmatoarea reprezentare
+a) [*|*]->[*|*]->[*|*]->nil
+   |      |      |
+   ->1    ->2    ->4
+b) [*|*]->[*|*]->[*|*]->nil
+   |      |      |
+   ->1    ->2    [*|*]->nil
+                 |
+                 ->4
+c) [*|*]->nil [*|*]->4
+   |          |
+   ->1        -> 2
+d) [*|*]----->[*|*]------>[*|*]->nil
+    |         |           |
+   [*|*]->nil [*|*]->nil  [*|*]->nil
+   |          |           |
+   ->1        -> 2        [*|*]->nil
+                          |
+                          ->4
+
+3. Lista (1 2 (4)) are urmatoarea reprezentare
+a) (car=1, cdr=(car=2, cdr=(car=(car=4,cdr=nil), cdr=nil)))
+b) (car=1, cdr=(car=2, cdr=(car=4, cdr=nil)))
+c) (val=1, val=2, val=(4), nil)
+d) (car=(car=1), car=(car=2), car=(car=(car=4)))
+e) (car=1, cdr=(car=2, cdr=(car=(car=4,cdr=nil))))
+
+4. marcati variantele corecte.
+a. nil este o lista
+b. evaluarea unei simbol trebuie sa fie un atom
+c. fiecare lista se termina cu nil
+d. listele sunt formate din celule cons
+e. al doilea pointer al unei celule cons trebuie sa pointeze catre o alta celula cons
+
+5. parametrii de timpul &rest
+a. impacheteaza (ex. 1 2 3 -> (1 2 3)) argumentele (trimise unei functii) intr-o lista
+b. sunt amplasati dupa argumentele optionale (&optional)
+c. trebuie sa fie precedati de alte tipuri de parametrii
+d. paremetrii &rest nu se folosesc cu tipul de parametrii &key (interpretorul arunca o erorare)
+
+6. parametrii &optional
+a. trebuie sa fie precedati de alt tip de parametrii
+b. trebuie sa fie initializati
+c. in cazul in care nu avem o initializare explicita, parametrii optionali se initializeaza la nil
+d. sunt precedati de parametrii de tipul &rest
+
+7. selectati variantele corecte:
+a. "set" modifica referinta
+b. "setf" nu modifica pe baza referintei
+c. "setq" nu evalueaza primul argument
+d. "set" nu evalueaza primul argument
+e. "setf" nu evalueaza primul argument
+
+8. selectati variantele corecte
+a. funcall aplica o functie pe un set de parametrii impachetati intr-o lista (ex. 1 2 3 -> (1 2 3))
+b. apply aplica o functie pe un set de parametrii impachetati intr-o lista (ex. 1 2 3 -> (1 2 3))
+c. nu este diferenta intre apply si funcall
+d. funcall functioneaza doar cu functii lambda
+
+9. functia mapcar:
+a. are acelasi comportament ca si functiile funcall si apply
+b. este destructiva (modifica lista originala) de fiecare data
+c. functioneaza doar cu functii ce accepta doar un singur argument
+d. aplica o functie pe fiecare element al unei liste
+
+10. listele de asociere:
+
+a. au reprezentare diferite de cea a listelor
+b. ai reprezentare ((a . b) (c . d) ...)
+d. odata declarate, listele de asociere nu pot fi modificate
+
+11. o functie lambda
+a. poate avea doar un singur argument
+b. poate fi folosita doar in combinatie cu mapcar
+c. se mai numeste functie anonima
+d. poate fi aplicata doar in cazul in care se foloseste operatorul #'
+
+12. operatorul #'
+a. se comporta la fel ca si operatorul '
+b. poate fi aplicat doar functiilor lambda
+c. este echivalent cu functia "function"
+
+13. scoping
+a. functia let* initializeaza parametrii in mod  paralel
+b. functia let initializeaza parametrii in mod paralel
+c. variabilele declarate intr-un corp let nu pot fi folosite in afara corpului
+d. variabilele declarate in corpul let* suprascriu pe cele globale
+
+14. functii de iterare
+a. do construieste un scoping local
+b. loop construieste un scoping local
+c. loop itereaza (by default) pana la infint
+d. do si do* difera prin modul de initializare
+
+problema 1.
+1. substitue un element din lista plata cu un altul specificat folosind forward
+problema 2.
+2. calculeaza numarul de atomi numerici dintr-o lista plata folosind recusivittea backward
+problema 3
+3. substitue un element din lista plata cu un altul specificat folosind mapcar
+3. substitue un element din lista plata cu un altul specificat folosind mapcan
+3. calculeaza numarul de atomi folosind mapcar
+problema 4
+4. substitue un element din lista plata cu un altul specificat folosind do
+4. substitue un element din lista plata cu un altul specificat folosind loop
+4. caculati fibonacci folosind o interatie loop
+problema 5
+4. suma elementelor unei liste imbricate folosind acumulatorul
+problema 6
+6. Scrieti o functie care verifica daca o lista este sublista pentru o a 2-a lista
