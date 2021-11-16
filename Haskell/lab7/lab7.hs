@@ -1,22 +1,22 @@
 module Lab7
-(flatten
-,palindromeL
-,palindromeS
-,palindromeL'
-,decimate ,enumerate
-,decimate'
-,decimate''
-,exp'
-,softmax
-,softmax'
-,softmax''
-,bf
-,df
-,softex''
-,graph
-,foldr'
-,foldl'
-) where
+    ( flatten
+    , palindromeL
+    , palindromeS
+    , palindromeL'
+    , decimate ,enumerate
+    , decimate'
+    , decimate''
+    , exp'
+    , softmax
+    , softmax'
+    , softmax''
+    , bf
+    , df
+    , softex''
+    , graph
+    , foldr'
+    , foldl'
+    ) where
 
 {-
  Higher order functions
@@ -28,17 +28,16 @@ module Lab7
 {-
     functii ce primesc functii ca si parametru sau returneaza functii
     de data trecuta: map - foarte folosita
+
 map
 filter
 reduce
 takeWhile
 dropWhile
-
+zipWith
 
 foldl
 foldr
-
-
 
 -}
 {-
@@ -59,7 +58,7 @@ foldr
 -}
 {-
     lambda functions - anonymous functions
-    \ x -> <body>
+    \x -> <body>
     simbolul "\" seamana cu lambda
     functii ce sunt folosite doar o data
     Ex:
@@ -74,6 +73,7 @@ foldr
     foldl1 f [1, 2, 3] -> f (f 1 2) 3
     foldr1 f [1, 2, 3] -> f 1 (f 2 3)
     foldr (*) 1 [1..3]
+    Exemplu asociativitate folds:
     foldr:: (* 1 (* 2 (* 3 1)))
     foldl:: (* (* (* 1 1) 2) 3)
     [1 2 6]
@@ -86,10 +86,11 @@ foldr
     scanr - comportament similar
 -}
 {-
-    $ - ii cam ciudat (sensul bun)
+    $
     f $ x = f x
     not wow
 -}
+
 {-
     function composition
     f . g = \x -> f (g x)
@@ -194,14 +195,14 @@ softmax'' :: [Double] -> [Double]
 softmax'' = map (\(x, _) -> x) . softex'' 0
 
 graph :: [(Char, Char)]
-graph=[('a', 'b')
-       ,('a', 'c')
-       ,('a', 'd')
-       ,('b', 'e')
-       ,('c', 'f')
-       ,('d', 'e')
-       ,('e', 'f')
-       ,('e', 'g')]
+graph=[ ('a', 'b')
+      , ('a', 'c')
+      , ('a', 'd')
+      , ('b', 'e')
+      , ('c', 'f')
+      , ('d', 'e')
+      , ('e', 'f')
+      , ('e', 'g')]
 
 
 bf :: Eq a => [a] -> [(a, a)] -> [a] -> [a]
@@ -226,3 +227,4 @@ foldr' fun initial (x : xn) = fun x $ foldr fun initial xn
 foldl' :: (b -> a -> b) -> b -> [a] -> b
 foldl' _ initial [] = initial
 foldl' fun initial (x : xn) = foldl fun (fun initial x) xn
+
