@@ -1,5 +1,8 @@
+
+main :: IO ()
+
 main = do
-    c <- getChar 
+    c <- getChar
     if c /= ' '
         then do
             putChar c

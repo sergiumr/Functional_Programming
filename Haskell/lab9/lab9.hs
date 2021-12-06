@@ -10,13 +10,14 @@ cylinder r h =
         circleArea = pi * r ^ 2 
     in  
         sideArea + circleArea
- 
+
 
 cylinder' :: (Floating a) => a -> a -> a
 cylinder' r h = sideArea + circleArea
     where
         sideArea = 2 * pi * r * h
         circleArea = pi * r ^ 2 
+
 dummy x 
     | x == 0 = acc1
     | x == 1 = acc1
@@ -63,7 +64,7 @@ dummy x
 
 --------------------------------------------------------------
 -- Ex1
-divisors n = 1:[x|x<-[2..(n `div` 2)], n `mod` x == 0] ++ [n] 
+divisors n = 1:[x | x<-[2..(n `div` 2)], n `mod` x == 0] ++ [n] 
 friends n m = m * nSum == n * mSum
     where 
         nSum = sum . divisors $ n
@@ -103,7 +104,7 @@ rests'' lista@(hd:tl) = lista : rests'' tl
 --------------------------------------------------------------
 -- Ex3
 isPrime n = all (\ x -> n `mod` x /= 0) [2..(n `div` 2)]
-listPrimes n = [x|x<-[2..(n `div` 2)], n `mod` x == 0, isPrime x]
+listPrimes n = [x | x<-[2..(n `div` 2)], n `mod` x == 0, isPrime x]
 --------------------------------------------------------------
 -- Ex4
 rests [] = [[]]

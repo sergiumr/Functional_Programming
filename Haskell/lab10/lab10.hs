@@ -30,8 +30,8 @@ qsort (a:as) = qsort left ++ [a] ++ qsort right
 
 main = print (qsort [8,4,0,3,1,23,11,18])
 
--- Ex1 -- Implemetati o varianta de 
--- map', 
+-- Ex1 -- Implemetati o varianta de
+-- map',
 map' _ [] = []
 map' fn (x:xn) = (fn x) : map' fn xn
 map'' fn ls = [fn x|x<-ls]
@@ -39,7 +39,7 @@ map'' fn ls = [fn x|x<-ls]
 foldl' fn acc [] = acc
 foldl' fn acc (x:xn) = foldl' fn (fn acc x) xn
 -- firstN,
--- backwards 
+-- backwards
 firstN 0 _ = []
 firstN _ [] = []
 firstN n (x:xn) = x : firstN (n-1) xn
@@ -50,10 +50,10 @@ firstN n (x:xn) = x : firstN (n-1) xn
 firstN' 0 _ acc = acc
 firstN' _ [] acc = acc
 firstN' n (x:xn) acc = firstN' (n-1) xn (acc ++ [x])
--- firstN' 2 [1,2,3] [] = firstN' (2-1) [2,3] ([] ++ [1]) 
--- firstN' 1 [2,3] [1]  = firstN' (1-1) [3] ([1] ++ [2]) 
+-- firstN' 2 [1,2,3] [] = firstN' (2-1) [2,3] ([] ++ [1])
+-- firstN' 1 [2,3] [1]  = firstN' (1-1) [3] ([1] ++ [2])
 -- firstN' 0 [3] [1,2]  = [1,2]
--- nextN 
+-- nextN
 nextN 0 ls = ls
 nextN _ [] = []
 nextN n (_:xn) = nextN (n-1) xn
@@ -80,22 +80,22 @@ interclasare xl@(x:xn) yl@(y:yn)
     | otherwise = y : interclasare xl yn
 interclasare3 xl yl zl = interclasare (interclasare xl yl) zl
 interclasareN:: Ord a => [[a]] -> [a]
-interclasareN = foldl1 interclasare 
+interclasareN = foldl1 interclasare
 -- Ex2 c -- Eliminarea duplicatelor
 elimDups [] acc = acc
-elimDups (x:xn) acc = if x `elem` acc 
+elimDups (x:xn) acc = if x `elem` acc
                         then elimDups xn acc
                         else elimDups xn (acc ++ [x])
 
 
 ------------------------------------------
--- Ex3 a -- Verificati daca un string este substring la un al string
--- Ex3 b -- Verificati daca sir de paranteze este corect 
--- ()() = corect, ()) - incorect
--- Ex3 c -- implemtarea grouby pe liste de asociatii
+-- Exectitii tema - (puncte bonus, daca vreti) Ex3 a -- Verificati daca un string este substring la un al string
+-- Exectitii tema - (puncte bonus, daca vreti) Ex3 b -- Verificati daca sir de paranteze este corect
+-- Exectitii tema - (puncte bonus, daca vreti) ()() = corect, ()) - incorect
+-- Exectitii tema - (puncte bonus, daca vreti) Ex3 c -- implemtarea grouby pe liste de asociatii
 ------------------------------------------
 -- Seturi
--- operatii pe seturi folosind arbori binari de cautare 
+-- operatii pe seturi folosind arbori binari de cautare
 -- (uniune, intersectie, diferenta, sortare)
 
 

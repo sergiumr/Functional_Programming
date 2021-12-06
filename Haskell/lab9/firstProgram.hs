@@ -1,4 +1,7 @@
+
+main :: IO ()
+
 main = do
-    putStrLn "Hello" 
+    putStrLn "Hello"
     name <- getLine
-    putStrLn ("Hey " ++ name)
+    putStrLn ("Hello " ++ name)
